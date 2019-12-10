@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="Client.Views.ChatView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Client.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="WhiteSmoke">
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="230"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl 
+                        Margin="5 5 5 0" 
+                        x:Name="MessageList">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border 
+                                    CornerRadius="10" 
+                                    BorderBrush="Black" 
+                                    Background="DodgerBlue"
+                                    Padding="3" Width="auto"
+                                    HorizontalAlignment="Left">
+                                        <StackPanel Margin="0 5 0 5">
+                                            <TextBlock 
+                                            FontFamily="Candara Light"
+                                            FontSize="13"
+                                            Text="{Binding SendDate}"
+                                            Margin="0 0 0 3"
+                                            Foreground="White"/>
+                                            <TextBlock 
+                                            FontFamily="Candara Light"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding MessageContent}"
+                                            TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsSender}" Value="true">
+                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsSender}" Value="false">
+                                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0"
+                             x:Name="Message"
+                             Margin="5 5 0 5"                     
+                             FontFamily="Candara Light"
+                             FontSize="16"
+                             FontWeight="Bold"
+                             TextWrapping="Wrap"
+                             SpellCheck.IsEnabled="True"/>
+                    <Button 
+                        x:Name="Send" Style="{StaticResource RoundButton}" Grid.Column="1" Margin="5" Foreground="White" FontFamily="Bauhaus 93" Content="Send"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <ListBox 
+                    x:Name="ConnectedUsers"
+                    Background="White"
+                    BorderBrush="White"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Margin="0 5 5 5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border 
+                                CornerRadius="0" 
+                                Background="WhiteSmoke"
+                                BorderBrush="White"
+                                BorderThickness="0"
+                                Height="60"
+                                HorizontalAlignment="Stretch"
+                                Cursor="Hand">
+                                    <StackPanel Margin="0 5 0 5">
+                                        <TextBlock 
+                                        FontFamily="Candara Light" 
+                                        FontWeight="ExtraBold"
+                                        FontSize="18"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Center"
+                                        Text="{Binding Name}"/>
+                                        <TextBlock 
+                                        x:Name="tbDate"
+                                        FontFamily="Candara Light" 
+                                        FontSize="15"
+                                        Foreground="Black"
+                                        HorizontalAlignment="Left"
+                                        Text="{Binding LastMessageDate}"
+                                        Visibility="{Binding IsMessageExist, 
+                                            Converter={StaticResource BoolToVis}}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
