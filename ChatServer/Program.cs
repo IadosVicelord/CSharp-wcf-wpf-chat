@@ -27,7 +27,6 @@ namespace ChatServer
         public List<ChatStoredUser> Registred
         {
             get { return _registred; }
-            //set { _registred = value; }
         }
         public Dictionary<ICallbackMessage, ChatUser> ConnectedUsers
         {

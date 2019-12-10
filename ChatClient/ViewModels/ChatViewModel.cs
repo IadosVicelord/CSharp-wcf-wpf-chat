@@ -16,6 +16,7 @@ namespace Client.ViewModels
         private string _message;
         private ShellViewModel _shell;
         private BindableCollection<Server.Message> _messageList;
+        private int _storedID;
         #endregion
 
         //Форма-контейнер
@@ -23,6 +24,12 @@ namespace Client.ViewModels
         {
             get => _shell;
             set => _shell = value;
+        }
+
+        public int StoredID
+        {
+            get => _storedID;
+            set => _storedID = value;
         }
 
         //Выбранный пользователь-получатель
@@ -34,12 +41,25 @@ namespace Client.ViewModels
             }
             set
             {
-                _selectedConnectedUser = value;
                 if (value != null)
                 {
-                    Shell.SelectedConnectedUser = value;
-                    MessageList = new BindableCollection<Server.Message>(Shell.GeneralModel.GetHistory());
-                    UpdateMessageList();
+                    //Ключ текущего выбранного пользователя. Если сейчас никакой пользователь не выбран, устанавливается -1.
+                    int _currentSelectedID = _selectedConnectedUser != null ? _selectedConnectedUser.ID : -1;
+
+                    //Установка выбранного пользователя
+                    _selectedConnectedUser = value;
+
+                    //Если устанавливаемое значение не пустое
+                    if (value != null)
+                    {
+                        //Если этот пользователь уже и так выбран, ничего не происходит
+                        if (_currentSelectedID != value.ID)
+                        {
+                            Shell.SelectedConnectedUser = value;
+                            MessageList = new BindableCollection<Server.Message>(Shell.GeneralModel.GetHistory());
+                            UpdateMessageList();
+                        }
+                    }
                 }
             }
         }
@@ -80,6 +100,7 @@ namespace Client.ViewModels
             }
             set
             {
+
                 _connectedUsers = value;
                 NotifyOfPropertyChange(() => this.ConnectedUsers);
             }

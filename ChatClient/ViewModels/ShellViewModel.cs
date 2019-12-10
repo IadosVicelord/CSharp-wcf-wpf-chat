@@ -68,6 +68,26 @@ namespace Client.ViewModels
             }
         }
 
+        public void KeepSelectedStore()
+        {
+            if(_currentChatVM.SelectedConnectedUser != null)
+            {
+                _currentChatVM.StoredID = _currentChatVM.SelectedConnectedUser.ID;
+            }
+        }
+
+        public void KeepSelectedSet()
+        {
+            if(_currentChatVM.ConnectedUsers != null)
+            {
+                var a = _currentChatVM.ConnectedUsers.FirstOrDefault(x => x.ID == _currentChatVM.StoredID);
+                if (a != null)
+                {
+                    _currentChatVM.SelectedConnectedUser = a;
+                }
+            }
+        }
+
         //Текущий выбранный пользователь-получатель
         public ChatUser SelectedConnectedUser
         {

@@ -4,8 +4,15 @@ using Caliburn.Micro;
 
 namespace Client.Models
 {
+    //Методы расширения
     static public class ExtensionMethods
     {
+        /// <summary>
+        /// Сортировка коллекции BindableCollection
+        /// </summary>
+        /// <typeparam name="T">Коллекция BindableCollection</typeparam>
+        /// <param name="collection">Коллекция</param>
+        /// <param name="comparison">Выражение сравнения</param>
         public static void Sort<T>(this BindableCollection<T> collection, Comparison<T> comparison)
         {
             var sortableList = new List<T>(collection);

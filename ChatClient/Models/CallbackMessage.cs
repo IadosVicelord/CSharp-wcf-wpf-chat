@@ -4,17 +4,26 @@ using System.Windows;
 
 namespace Client.Models
 {
+    /// <summary>
+    /// Методы которые может вызывать сервис
+    /// </summary>
     class CallbackMessage : IMessageContractCallback
     {
         public GeneralDataModel GeneralModel { get; set; }
 
-        //Конструктор
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="general">Модель данных</param>
         public CallbackMessage(GeneralDataModel general)
         {
             GeneralModel = general;
         }
-        
-        //Обработка получения сообщения
+
+        /// <summary>
+        /// Обработка получения сообщения
+        /// </summary>
+        /// <param name="Msg">Сообщение</param>
         public void GetMessage(Message Msg)
         {
             //Если отправитель - сервер
@@ -41,13 +50,20 @@ namespace Client.Models
             }
         }
 
-        //Обновить список подключенных пользователей
+        /// <summary>
+        /// Обновление списка подключенных пользователей
+        /// </summary>
+        /// <param name="Users">Массив пользователей</param>
         public void UpdateConnected(ChatUser[] Users)
         {
             GeneralModel.UpdateConnectedUsers(Users);
         }
 
-        //Обработка сообщений сервера
+        /// <summary>
+        /// Обработка сообщений сервера
+        /// </summary>
+        /// <param name="message">Сообщение</param>
+        /// <param name="time">Дата отправления</param>
         public void DecodeServerMessage(string message, DateTime time)
         {
             switch (message)

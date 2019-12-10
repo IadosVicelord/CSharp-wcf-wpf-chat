@@ -100,8 +100,10 @@ namespace Client.Models
             if (!u.IsMessageExist)
                 u.IsMessageExist = true;
 
+            Shell.KeepSelectedStore();
             //Сортировка пользователей по дате последнего сообщения переписки
             Shell.ConnectedUsers.Sort((a, b) => a.LastMessageDate.CompareTo(b.LastMessageDate));
+            Shell.KeepSelectedSet();
             Shell.UpdateConnectedList();
         }
         
