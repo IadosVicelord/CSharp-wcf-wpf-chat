@@ -1,4 +1,4 @@
-# CSharp-projects
+# CSharp-WCF-WPF-chat
 C# WPF/WCF чат
 
 Сервер расположен в папке ChatServer.
