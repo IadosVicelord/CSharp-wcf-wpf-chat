@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Models\CallbackMessage.cs" />
     <Compile Include="Models\ExtensionMethods.cs" />
     <Compile Include="Models\GeneralDataModel.cs" />

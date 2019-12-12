@@ -56,6 +56,7 @@ namespace Client.ViewModels
             {
                 _username = value;
                 NotifyOfPropertyChange(Username);
+                NotifyOfPropertyChange(() => CanLogIn);
             }
         }
 
@@ -67,6 +68,7 @@ namespace Client.ViewModels
             {
                 _password = value;
                 NotifyOfPropertyChange(Password);
+                NotifyOfPropertyChange(() => CanLogIn);
             }
         }
 
@@ -84,7 +86,13 @@ namespace Client.ViewModels
         }
 
         //Блокировка кнопки входа до заполнения имени пользователя
-        public bool CanLogIn(string username, string password) => (!string.IsNullOrEmpty(username) && !username.Contains(' '));
+        public bool CanLogIn
+        {
+            get
+            {
+                return (Username?.Length > 0 && Password?.Length > 0);
+            }
+        }
 
         //Обработка кнопки входа
         public void LogIn(string username, string password)

@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
+using Client.Helpers;
 using Client.ViewModels;
 
 namespace Client
@@ -9,6 +11,11 @@ namespace Client
         public Bootstrapper()
         {
             Initialize();
+
+            ConventionManager.AddElementConvention<PasswordBox>(
+            PasswordBoxHelper.BoundPasswordProperty,
+            "Password",
+            "PasswordChanged");
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
