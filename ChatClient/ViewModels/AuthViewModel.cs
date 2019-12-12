@@ -95,9 +95,9 @@ namespace Client.ViewModels
         }
 
         //Обработка кнопки входа
-        public void LogIn(string username, string password)
+        public void LogIn()
         {
-            GeneralModel.Connect(username, password);
+            GeneralModel.Connect(Username, Password);
         }
     }
 }
